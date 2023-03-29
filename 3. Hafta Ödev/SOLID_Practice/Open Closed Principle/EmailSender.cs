@@ -1,23 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace OpenClosedPrinciple
+﻿namespace SingleResponsibility
 {
-
     internal class EmailSender
     {
-        private IEmailType emailType{ get; set; }
         private string emailAddress { get; set; }
-
-        public EmailSender(): this("abcdef",new Gmail()){ }
-
-        public EmailSender(string address):this(address,new Gmail()){ }
-
-        public EmailSender(IEmailType type) : this("abcdef", type) { }
-
-        public EmailSender(string address,IEmailType type)
+        public EmailSender(string email)
         {
-            emailType = type;
-            emailAddress = emailType.MailFormat(address);
+            emailAddress = email;
         }
 
         public bool SendEmail()

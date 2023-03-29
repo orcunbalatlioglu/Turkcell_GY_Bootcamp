@@ -1,4 +1,4 @@
-﻿namespace OpenClosedPrinciple
+﻿namespace SingleResponsibility
 {
     public partial class PaymentPage : Form
     {
@@ -23,11 +23,6 @@
 
             if(orderProcessor.IsPaymentCompleted)
                 this.Close();
-        }
-
-        private void txtCardName_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

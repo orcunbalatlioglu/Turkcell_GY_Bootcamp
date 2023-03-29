@@ -1,4 +1,4 @@
-﻿namespace OpenClosedPrinciple
+﻿namespace SingleResponsibility
 {
     partial class PaymentPage
     {
@@ -84,7 +84,6 @@
             this.txtCardName.Name = "txtCardName";
             this.txtCardName.Size = new System.Drawing.Size(124, 23);
             this.txtCardName.TabIndex = 6;
-            this.txtCardName.TextChanged += new System.EventHandler(this.txtCardName_TextChanged);
             // 
             // lblCardName
             // 

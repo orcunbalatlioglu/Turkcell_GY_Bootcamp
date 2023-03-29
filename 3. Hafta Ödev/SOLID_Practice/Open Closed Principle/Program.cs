@@ -1,4 +1,4 @@
-namespace OpenClosedPrinciple
+namespace SingleResponsibility
 {
     internal static class Program
     {
