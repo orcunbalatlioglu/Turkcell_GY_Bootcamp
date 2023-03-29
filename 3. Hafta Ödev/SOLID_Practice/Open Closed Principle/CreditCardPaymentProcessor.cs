@@ -1,6 +1,6 @@
-﻿namespace SingleResponsibility
+﻿namespace OpenClosedPrinciple
 {
-    internal class PaymentProcessor
+    internal class CreditCardPaymentProcessor : IPaymentProcessor
     {
         private string Name { get; set; }
         private string CardNumber { get; set; }
@@ -12,7 +12,7 @@
         public bool IsDateValid { get; set; }
         public bool IsCv2Valid { get; set; }
 
-        public PaymentProcessor(string _name, string _number, int _month, int _year, int _cv2)
+        public CreditCardPaymentProcessor(string _name, string _number, int _month, int _year, int _cv2)
         {
             Name = _name;
             CardNumber = _number;
@@ -20,17 +20,18 @@
             Year = _year;
             Cv2 = _cv2;
         }
-        public void ProcessPayment()
+        public Tuple<bool,string> ProcessPayment()
         {
             if (!validateName())
-                return;
+                return Tuple.Create(false, "Ödemeniz başarısız olmuştur!\nGirdiğiniz isim geçersiz.");
             else if (!validateNumber())
-                return;
+                return Tuple.Create(false, "Ödemeniz başarısız olmuştur!\nGirdiğiniz kart numarası geçersiz.");
             else if (!validateDate())
-                return;
+                return Tuple.Create(false, "Ödemeniz başarısız olmuştur!\nGirdiğiniz kart son kullanma tarihi geçersiz.");
             else if (!validateCV2())
-                return;
+                return Tuple.Create(false, "Ödemeniz başarısız olmuştur!\nGirdiğiniz CV2 numarası geçersiz.");
             //Process the payment
+            return Tuple.Create(true,"Ödemeniz başarılı şekilde tamamlanmıştır.");
         }
         private bool validateName()
         {
@@ -68,5 +69,21 @@
             return true;
         }
 
+    }
+
+    internal class CashPaymentProcessor : IPaymentProcessor
+    {
+        public Tuple<bool, string> ProcessPayment()
+        {
+            return Tuple.Create(true, "Ödemeniz başarılı şekilde tamamlanmıştır.");
+        }
+    }
+
+    internal class PointPaymentProcessor : IPaymentProcessor
+    {
+        public Tuple<bool, string> ProcessPayment()
+        {
+            return Tuple.Create(true, "Ödemeniz başarılı şekilde tamamlanmıştır.");
+        }
     }
 }

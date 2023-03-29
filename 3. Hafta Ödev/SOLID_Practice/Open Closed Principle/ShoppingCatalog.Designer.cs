@@ -1,4 +1,4 @@
-﻿namespace SingleResponsibility
+﻿namespace OpenClosedPrinciple
 {
     partial class ShoppingCatalog
     {

@@ -1,4 +1,4 @@
-﻿namespace SingleResponsibility
+﻿namespace OpenClosedPrinciple
 {
     internal class OrderValidator
     {

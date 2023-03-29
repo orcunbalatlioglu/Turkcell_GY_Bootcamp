@@ -1,4 +1,4 @@
-﻿namespace SingleResponsibility
+﻿namespace OpenClosedPrinciple
 {
     public struct Item
     {
