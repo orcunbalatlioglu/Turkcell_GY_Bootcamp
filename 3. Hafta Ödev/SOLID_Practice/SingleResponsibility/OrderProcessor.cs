@@ -2,7 +2,7 @@
 {
     public class OrderProcessor
     {   
-        public bool IsValid { get; set; }
+        public bool IsOrderValid { get; set; }
         public bool IsPaymentCompleted { get; set; }
         public bool IsEmailSent { get; set; }
         public string Email { get; set; }
@@ -21,16 +21,16 @@
             Validator = new OrderValidator(Order);
             if (!Validator.ValidateBalance())
             { 
-                IsValid = false;
+                IsOrderValid = false;
                 return "Siparişiniz geçersiz fiyat sebebi ile gerçekleştirilememiştir!\nTek bir siparişin 500 TL üzerinde olmaması gerekmektedir.";
             }
 
             if (!Validator.ValidateAmount()) {
-                IsValid = false; 
+                IsOrderValid = false; 
                 return "Siparişiniz geçersiz ürün miktarı sebebi ile gerçekleştirilememiştir!\nTek bir üründen en fazla 10 adet eklenebilmektedir.";
             }
                 
-            IsValid = true;
+            IsOrderValid = true;
             return "Siparişiniz başarılı bir şekilde oluşturulmuştur.";
         }
 

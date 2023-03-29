@@ -2,23 +2,23 @@
 {
     internal class PaymentProcessor
     {
-        private string name { get; set; }
-        private string cardNumber { get; set; }
-        private int month { get; set; }
-        private int year { get; set; }
-        private int cv2 { get; set; }
+        private string Name { get; set; }
+        private string CardNumber { get; set; }
+        private int Month { get; set; }
+        private int Year { get; set; }
+        private int Cv2 { get; set; }
         public bool IsNameValid { get; set; }
         public bool IsCreditCardNumberValid { get; set; }
         public bool IsDateValid { get; set; }
         public bool IsCv2Valid { get; set; }
 
-        public PaymentProcessor(string _name, string number, int _month, int _year, int _cv2)
+        public PaymentProcessor(string _name, string _number, int _month, int _year, int _cv2)
         {
-            name = _name;
-            cardNumber = number;
-            month = _month;
-            year = _year;
-            cv2 = _cv2;
+            Name = _name;
+            CardNumber = _number;
+            Month = _month;
+            Year = _year;
+            Cv2 = _cv2;
         }
         public void ProcessPayment()
         {
@@ -34,7 +34,7 @@
         }
         private bool validateName()
         {
-            if (name == "" || !name.Contains(" ")) {
+            if (Name == "" || !Name.Contains(" ")) {
                 IsNameValid = false;
                 return false;
             }
@@ -44,8 +44,8 @@
         }
         private bool validateNumber()
         {
-            cardNumber = cardNumber.Replace(" ", "");
-            if (cardNumber == null || cardNumber.Length < 16) {
+            CardNumber = CardNumber.Replace(" ", "");
+            if (CardNumber == null || CardNumber.Length < 16) {
                 IsCreditCardNumberValid = false;
                 return false;
             }
@@ -59,7 +59,7 @@
         }
         private bool validateCV2()
         {
-            if (cv2.ToString().Length < 3)
+            if (Cv2.ToString().Length < 3)
             {
                 IsCv2Valid = false;
                 return false;

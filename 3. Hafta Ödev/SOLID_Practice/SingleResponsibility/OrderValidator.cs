@@ -9,12 +9,8 @@
             Order = order;
         }
 
-        public bool ValidateBalance()
-        {
-            if(Order.Balance > 500)
-                return false;
-            return true;
-        }
+        public bool ValidateBalance() => Order.Balance > 500;
+
         public bool ValidateAmount() { 
             foreach (var item in Order.Items)
             {

@@ -58,7 +58,7 @@ namespace SingleResponsibility
                 orderProcessor = new OrderProcessor(order);
                 string validationMessage = orderProcessor.ValidateOrder();
                 MessageBox.Show(validationMessage);
-                if (orderProcessor.IsValid)
+                if (orderProcessor.IsOrderValid)
                 {
                     PaymentPage paymentPage = new PaymentPage(orderProcessor);
                     paymentPage.ShowDialog();
@@ -94,25 +94,10 @@ namespace SingleResponsibility
             txtPrice.Text = "";
             numericAmount.Value = 0;
         }
-        private bool IsItemSelected()
-        {
-            if(txtPrice.Text != "" && txtName.Text != "" && numericAmount.Value != 0)
-                return true;
-            return false;
-        }
+        private bool IsItemSelected() => txtPrice.Text != "" && txtName.Text != "" && numericAmount.Value != 0;
 
-        private bool IsCartNull()
-        {
-            if(Cart is null)
-                return true;
-            return false;
-        }
+        private bool IsCartNull() => Cart is null;
 
-        private bool IsCartEmpty()
-        {
-            if (Cart.Count > 0)
-                return false;
-            return true;
-        }
+        private bool IsCartEmpty() => Cart.Count > 0;
     }
 }
