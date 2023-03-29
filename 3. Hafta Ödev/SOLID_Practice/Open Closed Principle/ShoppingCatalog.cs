@@ -66,13 +66,9 @@ namespace OpenClosedPrinciple
 
                 if (orderProcessor.IsPaymentCompleted)
                 {
-                    if(orderProcessor.Email != null) { 
-                        MessageBox.Show(orderProcessor.SendEmail());
-                    }
-                    else
-                    {
-                        MessageBox.Show(orderProcessor.SendEmail("abcdef@outlook.com"));
-                    }
+                    
+                    MessageBox.Show(orderProcessor.SendEmail());
+                   
                     Cart.Clear();
                     MessageBox.Show("Sepetiniz boşaltılmıştır!");
                 }
@@ -98,6 +94,6 @@ namespace OpenClosedPrinciple
 
         private bool IsCartNull() => Cart is null;
 
-        private bool IsCartEmpty() => Cart.Count > 0;
+        private bool IsCartEmpty() => Cart.Count == 0;
     }
 }

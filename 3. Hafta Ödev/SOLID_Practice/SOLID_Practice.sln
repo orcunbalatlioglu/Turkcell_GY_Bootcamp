@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SingleResponsibility", "SingleResponsibility\SingleResponsibility.csproj", "{729DCCB5-0A46-4B8D-B22E-6D0E984BB869}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open Closed Principle", "Open Closed Principle\Open Closed Principle.csproj", "{F98E4D18-356B-4189-B9F8-40B407D0EB87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenClosedPrinciple", "Open Closed Principle\OpenClosedPrinciple.csproj", "{F98E4D18-356B-4189-B9F8-40B407D0EB87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

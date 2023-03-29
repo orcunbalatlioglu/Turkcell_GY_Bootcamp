@@ -98,6 +98,6 @@ namespace SingleResponsibility
 
         private bool IsCartNull() => Cart is null;
 
-        private bool IsCartEmpty() => Cart.Count > 0;
+        private bool IsCartEmpty() => Cart.Count == 0;
     }
 }
