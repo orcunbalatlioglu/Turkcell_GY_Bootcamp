@@ -4,7 +4,7 @@
     {
         List<ICarType> Cars { get; set; }
 
-        public Fleet(List<ICarType> cars)
+        public CarFleet(List<ICarType> cars)
         {
             Cars = cars;
         }
