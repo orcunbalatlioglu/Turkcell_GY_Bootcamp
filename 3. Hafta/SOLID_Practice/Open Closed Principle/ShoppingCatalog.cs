@@ -12,21 +12,21 @@ namespace OpenClosedPrinciple
 
         private void btnItem1_Click(object sender, EventArgs e)
         {
-            txtName.Text = "Muz";
+            txtName.Text = "Banana";
             txtPrice.Text = "25";
             numericAmount.Value = 1;
         }
 
         private void btnItem2_Click_1(object sender, EventArgs e)
         {
-            txtName.Text = "Erik";
+            txtName.Text = "Plum";
             txtPrice.Text = "50";
             numericAmount.Value = 1;
         }
 
         private void btnItem3_Click_1(object sender, EventArgs e)
         {
-            txtName.Text = "Portakal";
+            txtName.Text = "Orange";
             txtPrice.Text = "15";
             numericAmount.Value = 1;
         }
@@ -46,7 +46,7 @@ namespace OpenClosedPrinciple
             }
             else
             {
-                MessageBox.Show("Herhangi bir ürün seçmediniz!");
+                MessageBox.Show("You have not selected any products!");
             }
         }
 
@@ -70,16 +70,16 @@ namespace OpenClosedPrinciple
                     MessageBox.Show(orderProcessor.SendEmail());
                    
                     Cart.Clear();
-                    MessageBox.Show("Sepetiniz boþaltýlmýþtýr!");
+                    MessageBox.Show("Your cart has been emptied!");
                 }
                 else
                 {
-                    MessageBox.Show("Ödemeniz tamamlanmadýðý için sepet boþaltýlmamýþtýr!");
+                    MessageBox.Show("The cart has not been emptied because your payment has not been completed!");
                 }
             }
             else
             {
-                MessageBox.Show("Sepetiniz boþ olduðu için iþleminiz tamamlanamamýþtýr!");
+                MessageBox.Show("Your transaction could not be completed because your cart is empty!");
             }
             ClearForm();
         }
