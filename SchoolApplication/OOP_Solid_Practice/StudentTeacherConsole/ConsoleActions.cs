@@ -1,4 +1,6 @@
 ﻿using ConsoleTables;
+using StringExtensionMethods;
+using System.Xml.Linq;
 
 /*#################################################################################
  *####### Bu sınıf arayüz önemli olmadığı için dikkatsizce yazılmıştır!############
@@ -49,6 +51,7 @@ namespace StudentTeacherConsole
             menu.Add("Load Default Data", 5);
             menu.Add("QUIT", 0);
             ConsoleTable table = new ConsoleTable("Operation", "Key");
+            table.Options.EnableCount = false;
             foreach (var item in menu)
             {
                 table.AddRow(item.Key, item.Value);
@@ -99,6 +102,7 @@ namespace StudentTeacherConsole
             operations.Add("Submit Homework", 6);
             Console.WriteLine("----- Student Operations -----");
             ConsoleTable table = new ConsoleTable("Operation", "Key");
+            table.Options.EnableCount = false;
             foreach (var item in operations)
             {
                 table.AddRow(item.Key, item.Value);
@@ -160,6 +164,7 @@ namespace StudentTeacherConsole
             types.Add("Deaf", 3);
 
             ConsoleTable table = new ConsoleTable("Type", "Key");
+            table.Options.EnableCount = false;
             foreach (var item in types)
             {
                 table.AddRow(item.Key, item.Value);
@@ -210,6 +215,7 @@ namespace StudentTeacherConsole
             operations.Add("Enter Exam Grade", 6);
 
             ConsoleTable table = new ConsoleTable("Operation", "Key");
+            table.Options.EnableCount = false;
             foreach (var item in operations)
             {
                 table.AddRow(item.Key, item.Value);
@@ -277,6 +283,7 @@ namespace StudentTeacherConsole
             operations.Add("Warn Student", 8);
 
             ConsoleTable table = new ConsoleTable("Operation", "Key");
+            table.Options.EnableCount = false;
             foreach (var item in operations)
             {
                 table.AddRow(item.Key, item.Value);
@@ -354,6 +361,7 @@ namespace StudentTeacherConsole
             operations.Add("Warn Teacher", 8);
 
             ConsoleTable table = new ConsoleTable("Operation", "Key");
+            table.Options.EnableCount = false;
             foreach (var item in operations)
             {
                 table.AddRow(item.Key, item.Value);
@@ -423,6 +431,7 @@ namespace StudentTeacherConsole
             Console.Clear();
             Console.Write("Enter name of student:");
             string name = Console.ReadLine();
+            name = name.FirstLetterToCapitalAndOthersToLower();
 
             if (StudentOrganizer.Add(name))
             {
@@ -442,6 +451,7 @@ namespace StudentTeacherConsole
             Console.Clear();
             Console.Write("Enter name of student:");
             string name = Console.ReadLine();
+            name = name.FirstLetterToCapitalAndOthersToLower();
 
             if (StudentOrganizer.AddBlind(name))
             {
@@ -461,6 +471,7 @@ namespace StudentTeacherConsole
             Console.Clear();
             Console.Write("Enter name of student:");
             string name = Console.ReadLine();
+            name = name.FirstLetterToCapitalAndOthersToLower();
 
             if (StudentOrganizer.AddDeaf(name))
             {
@@ -481,6 +492,8 @@ namespace StudentTeacherConsole
             Console.Clear();
             Console.Write("Enter name of teacher:");
             string name = Console.ReadLine();
+            name = name.FirstLetterToCapitalAndOthersToLower();
+
             Console.Write("Enter speciality of teacher:");
             string speciality = Console.ReadLine();
 
@@ -503,6 +516,7 @@ namespace StudentTeacherConsole
             Console.Clear();
             Console.Write("Enter name of supervisor:");
             string name = Console.ReadLine();
+            name = name.FirstLetterToCapitalAndOthersToLower();
             Console.Write("Enter speciality of supervisor:");
             string speciality = Console.ReadLine();
 
@@ -524,6 +538,7 @@ namespace StudentTeacherConsole
             Console.Clear();
             Console.Write("Enter name of manager:");
             string name = Console.ReadLine();
+            name = name.FirstLetterToCapitalAndOthersToLower();
             Console.Write("Enter speciality of manager:");
             string speciality = Console.ReadLine();
 
@@ -640,11 +655,13 @@ namespace StudentTeacherConsole
             Console.Clear();
             Console.WriteLine("Enter name of student who you will search: ");
             string studentName = Console.ReadLine();
+            studentName = studentName.FirstLetterToCapitalAndOthersToLower();
 
             var results = StudentOrganizer.FilterByName(studentName);
             if (ObjectNullHandling(results,"student"))
             {
                 ConsoleTable table = new ConsoleTable("Id", "Name");
+                table.Options.EnableCount = false;
                 foreach (var result in results)
                 {
                     table.AddRow(result.Id, result.Name);
@@ -659,11 +676,13 @@ namespace StudentTeacherConsole
             Console.Clear();
             Console.WriteLine("Enter name of teacher who you will search: ");
             string teacherName = Console.ReadLine();
+            teacherName = teacherName.FirstLetterToCapitalAndOthersToLower();
 
             var results = TeacherOrganizer.FilterByName(teacherName);
-            if (ObjectNullHandling(results, "student"))
+            if (ObjectNullHandling(results, "teacher"))
             {
                 ConsoleTable table = new ConsoleTable("Id", "Name", "Speciality");
+                table.Options.EnableCount = false;
                 foreach (var result in results)
                 {
                     table.AddRow(result.Id, result.Name, result.Speciality);
@@ -678,11 +697,13 @@ namespace StudentTeacherConsole
             Console.Clear();
             Console.WriteLine("Enter name of supervisor who you will search: ");
             string supervisorName = Console.ReadLine();
+            supervisorName = supervisorName.FirstLetterToCapitalAndOthersToLower();
 
             var results = SupervisorOrganizer.FilterByName(supervisorName);
-            if (ObjectNullHandling(results, "student"))
+            if (ObjectNullHandling(results, "manager"))
             {
                 ConsoleTable table = new ConsoleTable("Id", "Name", "Speciality");
+                table.Options.EnableCount = false;
                 foreach (var result in results)
                 {
                     table.AddRow(result.Id, result.Name, result.Speciality);
@@ -697,11 +718,13 @@ namespace StudentTeacherConsole
             Console.Clear();
             Console.WriteLine("Enter name of manager who you will search: ");
             string managerName = Console.ReadLine();
-            var results = ManagerOrganizer.FilterByName(managerName);
+            managerName = managerName.FirstLetterToCapitalAndOthersToLower();
 
-            ConsoleTable table = new ConsoleTable("Id", "Name","Speciality");
-            if (ObjectNullHandling(results, "student"))
+            var results = ManagerOrganizer.FilterByName(managerName);
+            if (ObjectNullHandling(results, "manager"))
             {
+                ConsoleTable table = new ConsoleTable("Id", "Name","Speciality");
+                table.Options.EnableCount = false;
                 foreach (var result in results)
                 {
                     table.AddRow(result.Id, result.Name, result.Speciality);
@@ -721,6 +744,7 @@ namespace StudentTeacherConsole
         {
             var students = StudentOrganizer.GetAll();
             ConsoleTable table = new ConsoleTable("Id", "Name");
+            table.Options.EnableCount = false;
             foreach (var student in students)
             {
                 table.AddRow(student.Id, student.Name);
@@ -737,6 +761,7 @@ namespace StudentTeacherConsole
         {
             var teachers = TeacherOrganizer.GetAll();
             ConsoleTable table = new ConsoleTable("Id", "Name", "Speciality");
+            table.Options.EnableCount = false;
             foreach (var teacher in teachers)
             {
                 table.AddRow(teacher.Id, teacher.Name, teacher.Speciality);
@@ -754,6 +779,7 @@ namespace StudentTeacherConsole
         {
             var supervisors = SupervisorOrganizer.GetAll();
             ConsoleTable table = new ConsoleTable("Id", "Name", "Speciality");
+            table.Options.EnableCount = false;
             foreach (var supervisor in supervisors)
             {
                 table.AddRow(supervisor.Id, supervisor.Name, supervisor.Speciality);
@@ -771,6 +797,7 @@ namespace StudentTeacherConsole
         {
             var managers = ManagerOrganizer.GetAll();
             ConsoleTable table = new ConsoleTable("Id", "Name", "Speciality");
+            table.Options.EnableCount = false;
             foreach (var manager in managers)
             {
                 table.AddRow(manager.Id, manager.Name, manager.Speciality);
