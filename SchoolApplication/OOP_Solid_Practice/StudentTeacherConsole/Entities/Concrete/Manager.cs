@@ -1,6 +1,6 @@
 ﻿namespace StudentTeacherConsole
 {
-    internal class Manager : ISupervise, IManager
+    internal class Manager : ISupervise, IManage
     {
         public int Id { get; set; }
         public string Name { get; set; }

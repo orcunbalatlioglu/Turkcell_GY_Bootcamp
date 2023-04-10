@@ -1,6 +1,6 @@
 ﻿namespace StudentTeacherConsole
 {
-    internal class Teacher 
+    internal class Teacher : ITeach
     {
         public int Id { get; set; }
         public string Name { get; set; }

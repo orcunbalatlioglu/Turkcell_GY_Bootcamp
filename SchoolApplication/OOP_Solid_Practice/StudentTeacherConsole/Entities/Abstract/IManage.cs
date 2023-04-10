@@ -1,6 +1,6 @@
 ﻿namespace StudentTeacherConsole
 {
-    internal interface IManager
+    internal interface IManage
     {
         public bool WarnTeacher();
         public bool CongratulateTeacher();
