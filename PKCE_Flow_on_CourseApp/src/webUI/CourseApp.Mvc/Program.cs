@@ -4,9 +4,7 @@ using CourseApp.Services;
 using CourseApp.Services.Mappings;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using Hangfire;
-using Hangfire.SqlServer;
-using CourseApp.HangfireBackgroundJobs.Schedules;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,25 +36,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
                 });
 
 
-//########## HANGFIRE #################
-var hangfireConnectionString = builder.Configuration["ConnectionStrings:HangfireConnection"];
-builder.Services.AddHangfire(config =>
-{
-    var option = new SqlServerStorageOptions
-    {
-        PrepareSchemaIfNecessary = true,
-        QueuePollInterval = TimeSpan.FromMinutes(5),
-        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-        UseRecommendedIsolationLevel = true,
-        //UsePageLocksOnDequeue = true,
-        DisableGlobalLocks = true
-    };
-
-    config.UseSqlServerStorage(hangfireConnectionString, option)
-          .WithJobExpirationTimeout(TimeSpan.FromHours(6));
-
-});
 
 var app = builder.Build();
 
@@ -88,22 +67,4 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-//########## HANGFIRE #################
-
-app.UseHangfireDashboard("/HangFireExample", new DashboardOptions
-{
-    DashboardTitle = "Orçun Balatlýoðlu Hangfire DashBoard",  // Dashboard sayfasýna ait Baþlýk alanýný deðiþtiririz.
-    AppPath = "/Home",                     // Dashboard üzerinden "back to site" button
-    //Authorization = new[] { new HangfireDashboardAuthorizationFilter() },   // Güvenlik için Authorization Ýþlemleri
-});
-//app.UseHangfireServer();
-app.UseHangfireServer(new BackgroundJobServerOptions
-{
-    SchedulePollingInterval = TimeSpan.FromSeconds(30),
-
-    //Arkaplanda çalýþacak Job sayýsýný deðiþtirebiliriz.
-    WorkerCount = Environment.ProcessorCount * 5
-});
-GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute { Attempts = 7 });
-RecurringJobs.HappinessMessage();
 app.Run();
