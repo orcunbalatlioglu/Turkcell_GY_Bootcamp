@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace StudentTeacherConsole
+﻿namespace StudentTeacherConsole
 {
     internal class ManagerOrganizer : IStaffOrganizer<Manager>
     {

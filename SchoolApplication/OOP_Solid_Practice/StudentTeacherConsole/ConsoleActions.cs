@@ -426,6 +426,30 @@ namespace StudentTeacherConsole
             }
         }
 
+        void ClassOperationMenu()
+        {
+            Dictionary<string, int> operations = new Dictionary<string, int>();
+            operations.Add("Add", 1);
+            operations.Add("Remove", 2);
+            operations.Add("List", 3);
+            operations.Add("Search", 4);
+            operations.Add("S", 5);
+
+            ConsoleTable table = new ConsoleTable("Operation", "Key");
+            table.Options.EnableCount = false;
+            foreach (var item in operations)
+            {
+                table.AddRow(item.Key, item.Value);
+            }
+            table.AddRow("Go Back", 0);
+
+            Console.Clear();
+            table.Write();
+            Console.WriteLine("Please select your operation from menu...");
+            Console.Write("Operation:");
+            ManagerOperationMenuInputCheck(Console.ReadKey().KeyChar);
+        }
+
         void AddStudent()
         {
             Console.Clear();
@@ -733,11 +757,6 @@ namespace StudentTeacherConsole
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
             }
-        }
-
-        void Sort()
-        {
-
         }
 
         void ListStudent(bool getInput)
