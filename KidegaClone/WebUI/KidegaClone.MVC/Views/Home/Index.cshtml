@@ -1,0 +1,58 @@
+﻿@model BookSearchViewModel
+@{
+    ViewData["Title"] = "Home";
+    var coloumnCount = 0;
+}
+<div class="container-fluid">
+    <div class="row d-flex justify-content-around">
+        <div class="col-2">
+            <div class="list-group">
+            @foreach (var categoryItem in Model.Categories)
+            {
+                
+                <a  asp-controller="Home" asp-action="Index" asp-route-id="@categoryItem.Id" class="list-group-item list-group-item-action">@categoryItem.Name</a>
+               
+            }
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="row">
+                <h2></h2>
+                @foreach (var bookCard in Model.Books)
+                {
+                    @if (coloumnCount != 0 && coloumnCount % 6 == 0)
+                    {
+                        @:</div><div class="row">
+                    }      
+                        <div class="col-2">
+                            <partial name="_BookCard" model="bookCard"/>
+                        </div>
+                        coloumnCount++;
+                }
+            </div>
+            @if (Model.PaginationInfo.TotalPages > 1)
+            {
+                <div class="text-center">
+                    <ul class="pagination">
+                        @if (Model.PaginationInfo.CurrentPage > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { pageNo = Model.PaginationInfo.CurrentPage - 1 })">Previous</a>
+                            </li>
+                        }
+
+                        @for (int i = 1; i <= Model.PaginationInfo.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.PaginationInfo.CurrentPage ? "active" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new { pageNo = i })">@i</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>                
+    </div>
+</div>
+
+
+

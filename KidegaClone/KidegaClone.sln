@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{F5B4BB1A-FDC9-4E83-8E28-9287D8DAB02B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainServices", "DomainServices", "{20E0C67B-10AA-49F3-9F4D-F31D09BE4CFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{45055663-2344-477F-900D-78B72A777FC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9C5689AA-B2B4-44CE-92F1-03F92E49A04A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{C6C3D498-99B2-44AC-B37B-624662867529}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KidegaClone.MVC", "WebUI\KidegaClone.MVC\KidegaClone.MVC.csproj", "{976D496A-841B-4022-8567-6A4C0152E47B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KidegaClone.Services", "Application\KidegaClone.Services\KidegaClone.Services.csproj", "{6CD67CD3-AC63-4ECB-BADF-BF797A88AA50}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KidegaClone.Domain", "Domain\KidegaClone.Domain\KidegaClone.Domain.csproj", "{6F9ABFA1-9DE6-4FA2-ACCD-ECD2BFB08968}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KidegaClone.DomainService", "DomainService\KidegaClone.DomainService\KidegaClone.DomainService.csproj", "{7C45FEBC-40D1-41BD-BE66-AF350C2E6278}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{976D496A-841B-4022-8567-6A4C0152E47B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{976D496A-841B-4022-8567-6A4C0152E47B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{976D496A-841B-4022-8567-6A4C0152E47B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{976D496A-841B-4022-8567-6A4C0152E47B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CD67CD3-AC63-4ECB-BADF-BF797A88AA50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CD67CD3-AC63-4ECB-BADF-BF797A88AA50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CD67CD3-AC63-4ECB-BADF-BF797A88AA50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CD67CD3-AC63-4ECB-BADF-BF797A88AA50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F9ABFA1-9DE6-4FA2-ACCD-ECD2BFB08968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F9ABFA1-9DE6-4FA2-ACCD-ECD2BFB08968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F9ABFA1-9DE6-4FA2-ACCD-ECD2BFB08968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F9ABFA1-9DE6-4FA2-ACCD-ECD2BFB08968}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C45FEBC-40D1-41BD-BE66-AF350C2E6278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C45FEBC-40D1-41BD-BE66-AF350C2E6278}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C45FEBC-40D1-41BD-BE66-AF350C2E6278}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C45FEBC-40D1-41BD-BE66-AF350C2E6278}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{976D496A-841B-4022-8567-6A4C0152E47B} = {C6C3D498-99B2-44AC-B37B-624662867529}
+		{6CD67CD3-AC63-4ECB-BADF-BF797A88AA50} = {45055663-2344-477F-900D-78B72A777FC2}
+		{6F9ABFA1-9DE6-4FA2-ACCD-ECD2BFB08968} = {F5B4BB1A-FDC9-4E83-8E28-9287D8DAB02B}
+		{7C45FEBC-40D1-41BD-BE66-AF350C2E6278} = {20E0C67B-10AA-49F3-9F4D-F31D09BE4CFC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7E07392-1B29-4C6D-9885-F1CC9538947F}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,37 @@
+﻿@model AuthorDetailViewModel
+@{
+    ViewData["Title"] = @Model.Author.Name + " " + @Model.Author.Surname;
+    var coloumnCount = 0;
+}
+<div class="row">
+    <div class="col-4">
+        <img src=@Model.Author.Picture alt="@Model.Author.Name" class="w-100"/>
+
+    </div>
+    <div class="col-8">
+        <div class="row">
+            <h1>
+                @Model.Author.Name @Model.Author.Surname
+            </h1>
+            <p>
+                @Model.Author.Biography
+            </p>
+        </div>        
+    </div>
+</div>
+
+<div class="row">
+    <h2>Yazarın Kitapları</h2>
+    @foreach (var bookCard in Model.BooksOfAuthor)
+    {
+        @if (coloumnCount != 0 && coloumnCount % 6 == 0)
+        {
+            @:</div><div class="row">
+        }      
+            <div class="col-2">
+                <partial name="_BookCard" model="bookCard"/>
+            </div>
+            coloumnCount++;
+    }
+</div>
+</div>

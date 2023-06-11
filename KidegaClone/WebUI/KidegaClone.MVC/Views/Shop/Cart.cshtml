@@ -1,0 +1,25 @@
+﻿@model CartViewModel
+@{
+    ViewData["Title"] = "Sepet";
+}
+<div class="row">
+    <div class="col-10">
+        <table class="table table-bordered text-center">
+            <tr>
+                <th>İsim</th>
+                <th>Adet</th>
+                <th>Fiyat</th>
+                <th>Toplam Fiyat</th>
+            </tr>           
+            @foreach(var item in Model.Cart.Content){
+                <tr>                       
+                    <td> @item.Book.Name </td>
+                    <td> @item.Quantity </td>
+                    <td> @item.Book.Price </td>
+                    <td> @((item.Book.Price * item.Quantity).ToString("N2")) </td>                 
+                </tr>
+            }            
+        </table>
+        <a asp-controller="Shop" asp-action="GiveOrder" asp-route-userId="@Model.User.Id" asp-route-addressId="@Model.Address.Id" class="btn btn-success">Sipariş Ver</a>
+    </div>
+</div>

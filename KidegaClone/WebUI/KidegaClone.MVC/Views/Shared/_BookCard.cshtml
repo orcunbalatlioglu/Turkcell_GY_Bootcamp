@@ -1,0 +1,16 @@
+﻿@model BookComponentInfo
+
+<div class="card">
+    <img src="@Model.Picture" class="img-fluid" />
+    <div class="card-body">
+        <h4 class="card-title">@Model.Name</h4>
+        <p class="card-text">@Model.PublisherName</p>
+        <p class="card-text">@Model.AuthorName</p>
+        <h5 class="card-text">@Model.Price TL</h5>
+        <p class="card-text">Puan: @Model.Rating</p>
+        <a asp-controller="Home" asp-action="BookDetail" asp-route-bookId="@Model.Id" class="btn btn-success">
+            Detay Gör
+        </a>
+    </div>
+
+</div>
