@@ -15,4 +15,8 @@
     <ProjectReference Include="..\..\Application\KidegaClone.Services\KidegaClone.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Editor\" />
+  </ItemGroup>
+
 </Project>

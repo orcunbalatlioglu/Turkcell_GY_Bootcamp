@@ -20,10 +20,6 @@ namespace KidegaClone.DomainService.Data
 
         public KidegaCloneDbContext(DbContextOptions<KidegaCloneDbContext> options): base(options) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = KidegaCloneDatabase; Integrated Security = True;");
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -148,6 +144,8 @@ namespace KidegaClone.DomainService.Data
 
             modelBuilder.Entity<Order>().Property(m => m.IsSuccesfullyPaid)
                                         .HasDefaultValue(false);
+            modelBuilder.Entity<Order>().Property(m=> m.TotalPrice)
+                                        .HasColumnType("decimal(10,2)");
 
 
 

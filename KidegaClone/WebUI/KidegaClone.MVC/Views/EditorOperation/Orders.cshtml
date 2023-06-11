@@ -1,0 +1,27 @@
+﻿@model IEnumerable<OrderListItem>
+@{
+    ViewData["Title"] = "Siparişler";
+}
+
+<div class="row m-auto">
+    <table class="d-flex flex-fill justify-content-center">
+        <tr>
+            <th>Sipariş Id</th>
+            <th>Adres</th>
+            <th>Kullanıcı Id</th>
+            <th>Toplam Tutar</th>
+            <th>Ödeme Durumu</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.OrderResponse.Id</td>
+                <td>@item.AddressResponse.Neighbourhood @item.AddressResponse.Street @item.AddressResponse.BuildingNo @item.AddressResponse.FlatNo @item.AddressResponse.District/@item.AddressResponse.City </td>
+                <td>@item.OrderResponse.UserID</td>
+                <td>@item.OrderResponse.TotalPrice</td>
+                <td>@item.OrderResponse.IsSuccesfullyPaid</td>
+            </tr>
+        }
+
+    </table>
+</div>

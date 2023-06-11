@@ -55,12 +55,12 @@ namespace KidegaClone.DomainService.Repositories
 
         public User? Get(int id)
         {
-            return _context.Users.SingleOrDefault(u => u.Id == id);
+            return _context.Users.AsNoTracking().SingleOrDefault(u => u.Id == id);
         }
 
         public async Task<User?> GetAsync(int id)
         {
-            return await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+            return await _context.Users.AsNoTracking().SingleOrDefaultAsync(u => u.Id == id);
         }
 
         public IList<User?> GetAll()
@@ -100,7 +100,7 @@ namespace KidegaClone.DomainService.Repositories
 
         public async Task<User?> GetByEmailAsync(string email)
         {
-            return await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+            return await _context.Users.AsNoTracking().SingleOrDefaultAsync(u => u.Email == email);
         }
 
         public IEnumerable<User> GetByName(string name)

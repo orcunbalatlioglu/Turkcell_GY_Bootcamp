@@ -15,7 +15,7 @@ namespace KidegaClone.Domain.Entities
         public Address Address { get; set; }
         [Required]
         public int AddressID { get; set; }
-        public int TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
         public bool? IsSuccesfullyPaid { get; set; } = false;
         
     }

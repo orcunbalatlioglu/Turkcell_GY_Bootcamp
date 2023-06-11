@@ -139,14 +139,14 @@ namespace KidegaClone.Services
 
         public IEnumerable<DisplayAddressResponse> GetByUserId(int userId)
         {
-            var addresses = _repository.Get(userId);
+            var addresses = _repository.GetByUserID(userId);
             var addressesDisplay = _mapper.Map<IEnumerable<DisplayAddressResponse>>(addresses);
             return addressesDisplay;
         }
 
         public async Task<IEnumerable<DisplayAddressResponse>> GetByUserIdAsync(int userId)
         {
-            var addresses = await _repository.GetAsync(userId);
+            var addresses = await _repository.GetByUserIDAsync(userId);
             var addressesDisplay = _mapper.Map<IEnumerable<DisplayAddressResponse>>(addresses);
             return addressesDisplay;
         }

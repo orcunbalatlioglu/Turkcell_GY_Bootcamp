@@ -15,7 +15,7 @@ namespace KidegaClone.Domain.DTOs.Request
         public Address Address { get; set; }
         [Required(ErrorMessage = "Adres id boş olamaz.")]
         public int AddressID { get; set; }
-        public int TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
         public bool? IsSuccesfullyPaid { get; set; } = false;
     }
 }

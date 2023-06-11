@@ -1,16 +1,13 @@
 using KidegaClone.DomainService.Data;
-using KidegaClone.DomainService.Repositories;
 using KidegaClone.MVC.Extensions;
-using KidegaClone.Services;
 using KidegaClone.Services.Mapping;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
 builder.Services.AddSession(opt =>
@@ -29,6 +26,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
                     opt.AccessDeniedPath = "/User/AccessDenied";
                     opt.ReturnUrlParameter = "routedPage";
                 });
+
+builder.Services.AddMemoryCache();
+builder.Services.AddResponseCaching(opt =>
+{
+    opt.SizeLimit = 50000;
+});
 
 var app = builder.Build();
 

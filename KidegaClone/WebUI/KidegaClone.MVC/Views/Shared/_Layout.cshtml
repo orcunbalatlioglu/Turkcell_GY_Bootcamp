@@ -22,17 +22,34 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
                         </li>
+                        @if(User.IsInRole("Client")){
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="Cart" asp-route-userId="@Model">Sepet</a>
-                        </li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="Cart">Sepet</a>
+                            </li>
+                        }
                         @if(User.Identity.IsAuthenticated){
                             <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Çıkış (@User.Identity.Name)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Profile">Profil</a>
                             </li>
                         }
                         else{
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Giriş</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="EditorOperation" asp-action="Orders">Siparişler</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ListUsers">Kullanıcı İşlemleri</a>
                             </li>
                         }
                     </ul>

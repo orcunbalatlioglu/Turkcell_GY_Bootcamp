@@ -64,12 +64,12 @@ namespace KidegaClone.DomainService.Repositories
 
         public Address? Get(int id)
         {
-            return _context.Addresses.SingleOrDefault(x => x.Id == id);
+            return _context.Addresses.AsNoTracking().SingleOrDefault(x => x.Id == id);
         }
 
         public async Task<Address?> GetAsync(int id)
         {
-            return await _context.Addresses.SingleOrDefaultAsync(c=> c.Id == id);
+            return await _context.Addresses.AsNoTracking().SingleOrDefaultAsync(c=> c.Id == id);
         }
 
         public IList<Address?> GetAll()

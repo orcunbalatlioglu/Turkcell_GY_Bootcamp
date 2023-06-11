@@ -54,12 +54,12 @@ namespace KidegaClone.DomainService.Repositories
 
         public Order? Get(int id)
         {
-            return _context.Orders.SingleOrDefault(x => x.Id == id);
+            return _context.Orders.AsNoTracking().SingleOrDefault(x => x.Id == id);
         }
 
         public async Task<Order?> GetAsync(int id)
         {
-            return await _context.Orders.SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Orders.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public IList<Order?> GetAll()

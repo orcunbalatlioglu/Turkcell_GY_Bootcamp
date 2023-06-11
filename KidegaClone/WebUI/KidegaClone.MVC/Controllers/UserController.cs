@@ -10,10 +10,13 @@ namespace KidegaClone.MVC.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService,
+                              IHttpContextAccessor httpContextAccessor)
         {
             _userService = userService;
+            _contextAccessor = httpContextAccessor;
         }
 
         public IActionResult Login(string? routedPage)
@@ -32,9 +35,10 @@ namespace KidegaClone.MVC.Controllers
                 {
                     Claim[] claims = new Claim[]
                     {
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                         new Claim(ClaimTypes.Name,user.Name),
                         new Claim(ClaimTypes.Email,user.Email),
-                        new Claim(ClaimTypes.Role,user.Role.ToString())
+                        new Claim(ClaimTypes.Role,user.Role.ToString())                        
                     };
                     ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     ClaimsPrincipal principal = new ClaimsPrincipal(identity);
@@ -58,6 +62,31 @@ namespace KidegaClone.MVC.Controllers
         {
             await HttpContext.SignOutAsync();
             return Redirect("/");
+        }
+
+        public async Task<IActionResult> Profile()
+        {
+            var userId = _contextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userService.GetByIdAsync(Convert.ToInt32(userId));
+            if (user == null)
+            {
+                return View("Error", "Shared");  
+            }
+            ProfileViewModel model = new ProfileViewModel()
+            {
+                Email = user.Email,
+                Surname = user.Surname,
+                Name = user.Name,
+                Phone = user.PhoneNumber
+            };
+
+            return View(model);
+        }
+
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
     }

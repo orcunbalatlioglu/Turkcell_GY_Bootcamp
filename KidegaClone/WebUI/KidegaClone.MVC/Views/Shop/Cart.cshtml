@@ -2,24 +2,75 @@
 @{
     ViewData["Title"] = "Sepet";
 }
-<div class="row">
-    <div class="col-10">
-        <table class="table table-bordered text-center">
-            <tr>
-                <th>İsim</th>
-                <th>Adet</th>
-                <th>Fiyat</th>
-                <th>Toplam Fiyat</th>
-            </tr>           
-            @foreach(var item in Model.Cart.Content){
-                <tr>                       
-                    <td> @item.Book.Name </td>
-                    <td> @item.Quantity </td>
-                    <td> @item.Book.Price </td>
-                    <td> @((item.Book.Price * item.Quantity).ToString("N2")) </td>                 
-                </tr>
-            }            
-        </table>
-        <a asp-controller="Shop" asp-action="GiveOrder" asp-route-userId="@Model.User.Id" asp-route-addressId="@Model.Address.Id" class="btn btn-success">Sipariş Ver</a>
-    </div>
-</div>
+@if(User.Identity.IsAuthenticated){
+    @if (Model.Cart.Content.Count > 0)
+    {
+        <div class="row">        
+            <div class="col-10">
+            
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <th>İsim</th>
+                            <th>Adet</th>
+                            <th>Fiyat</th>
+                            <th>Toplam Fiyat</th>
+                        </tr>           
+                        @foreach (var item in Model.Cart.Content)
+                        {
+                            <tr>                       
+                                <td> @item.Book.Name </td>
+                                <td> @item.Quantity </td>
+                                <td> @item.Book.Price </td>
+                                <td> @(
+                               (item.Book.Price * item.Quantity).ToString("N2")
+                               ) </td>                 
+                            </tr>
+                        }                      
+                    </table>
+                    
+            </div>
+            <div class="col-2">
+                <label id="addressError"></label>
+                <select class="form-select" id="addressSelect" aria-label="Adres">
+                    <option hidden>Adres Seçiniz</option>
+                    @foreach(var address in Model.Address){
+                        <option value="@address.Id">
+                            <h6>@address.Name</h6>
+                            <br>
+                            <p>
+                                @address.Neighbourhood,@address.Street,@address.BuildingNo,@address.FlatNo @address.District/@address.City
+                            </p>
+                        </option>
+                    }
+                </select>
+                <h2>
+                    Sipariş Tutarı: <span id="CartTotalPrice"> @Model.TotalCartPrice </span>
+                </h2>                
+                <a id="orderButton" class="btn btn-success" asp-controller="Shop" asp-action="GiveOrder" asp-route-userId="@Model.CartUser.Id" asp-route-addressId="@Model.selectedAddressId">Sipariş Ver</a>
+            </div>    
+        </div>
+        <script>         
+            document.getElementById("orderButton").addEventListener("click", function () {
+                var component = document.getElementById('addressSelect');
+                var selectedIndex = component.selectedIndex;
+                var selectedOption = component.options[selectedIndex];
+                var selectedValue = selectedOption.value;
+                if (seledtedValue != 0){
+                    @Model.selectedAddressId = selectedValue;
+                }
+                else{
+                    "Adres seçiniz" = document.getElementById("addressError").innerHTML;
+                }
+                
+            });
+        </script>
+    }
+    else
+    {
+        <h1>Sepetiniz boş</h1>
+    }
+}
+else{
+    <h1>Lütfen giriş yapınız.</h1>
+
+}

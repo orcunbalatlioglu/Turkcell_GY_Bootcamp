@@ -54,12 +54,12 @@ namespace KidegaClone.DomainService.Repositories
 
         public Category? Get(int id)
         {
-            return _context.Categories.SingleOrDefault(x => x.Id == id);
+            return _context.Categories.AsNoTracking().SingleOrDefault(x => x.Id == id);
         }
 
         public async Task<Category?> GetAsync(int id)
         {
-            return await _context.Categories.SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Categories.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public IList<Category?> GetAll()
@@ -94,22 +94,22 @@ namespace KidegaClone.DomainService.Repositories
 
         public IEnumerable<Category> GetByBook(Book book)
         {
-            return _context.Categories.Where(b => b.Books.Any(c => c.Book == book)).AsEnumerable();
+            return _context.Categories.AsNoTracking().Where(b => b.Books.Any(c => c.Book == book)).AsEnumerable();
         }
 
         public async Task<IEnumerable<Category>> GetByBookAsync(Book book)
         {
-            return await _context.Categories.Where(b => b.Books.Any(c => c.Book == book)).ToListAsync();
+            return await _context.Categories.AsNoTracking().Where(b => b.Books.Any(c => c.Book == book)).ToListAsync();
         }
 
         public IEnumerable<Category> GetByBookID(int bookId)
         {
-            return _context.Categories.Where(b => b.Books.Any(c => c.BookID == bookId)).AsEnumerable();
+            return _context.Categories.AsNoTracking().Where(b => b.Books.Any(c => c.BookID == bookId)).AsEnumerable();
         }
         
         public async Task<IEnumerable<Category>> GetByBookIDAsync(int bookId)
         {
-            return await _context.Categories.Where(b => b.Books.Any(c => c.BookID == bookId)).ToListAsync();
+            return await _context.Categories.AsNoTracking().Where(b => b.Books.Any(c => c.BookID == bookId)).ToListAsync();
         }
     }
 }

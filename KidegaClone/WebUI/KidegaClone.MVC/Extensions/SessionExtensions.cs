@@ -14,5 +14,9 @@ namespace KidegaClone.MVC.Extensions
             var serializedString = session.GetString(key);
             return serializedString == null ? default(T) : JsonSerializer.Deserialize<T>(serializedString);
         }
+        public static void DeleteJson(this ISession session, string key)
+        {
+            session.Remove(key);
+        }
     }
 }

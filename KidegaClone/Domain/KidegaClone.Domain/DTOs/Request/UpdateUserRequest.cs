@@ -11,10 +11,13 @@ namespace KidegaClone.Domain.DTOs.Request
         public string Name { get; set; }
         [Required(ErrorMessage = "Soyisim boş bırakılamaz.")]
         public string Surname { get; set; }
-        [Required]
+        [Required(ErrorMessage = "E-posta adresi boş bırakılamaz.")]
+        [EmailAddress(ErrorMessage ="Geçerli bir e-posta adresi giriniz!")]
+        public string Email { get; set; }
+        [Required(ErrorMessage = "Şifre boş bırakılamaz!")]
         [MinLength(8, ErrorMessage = "En az 8 karakter!")]
         public string Password { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Rol boş bırakılamaz!")]
         public Role Role { get; set; }
         public string? PhoneNumber { get; set; }
         public ICollection<Address>? Addresses { get; set; }

@@ -3,7 +3,6 @@ using KidegaClone.DomainService.Repositories;
 using KidegaClone.Domain.DTOs.Request;
 using KidegaClone.Domain.DTOs.Response;
 using KidegaClone.Domain.Entities;
-using KidegaClone.Services.Extensions;
 
 namespace KidegaClone.Services
 {

@@ -46,7 +46,7 @@ namespace KidegaClone.Services.Mapping
             //User
             CreateMap<User, DisplayUserResponse>();
             CreateMap<CreateNewUserRequest, User>();
-            CreateMap<UpdateUserRequest, User>();
+            CreateMap<UpdateUserRequest, User>().ReverseMap();
         }
     }
 }

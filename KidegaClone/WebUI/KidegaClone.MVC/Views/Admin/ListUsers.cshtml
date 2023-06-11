@@ -1,0 +1,36 @@
+﻿@model UserOperationViewModel
+@{
+    ViewData["Title"] = "User List";
+}
+
+<div class="row m-auto">
+    <div class="col-11"></div>
+    <div class="col-1">
+    <a class="btn btn-success d-flex justify-content-center" asp-controller="Admin" asp-action="AddUser">Ekle</a>
+    </div>
+    <table class="d-flex flex-fill justify-content-center">
+        <tr>
+            <th>İsim</th>
+            <th>Soyisim</th>
+            <th>E-posta Adresi</th>
+            <th>Telefon Numarası</th>
+            <th>İşlemler</th>
+        </tr>
+        @foreach(var user in Model.UserList)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Surname</td>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+                <td>                    
+                    <a class="btn btn-secondary" asp-controller="Admin" asp-action="UpdateUser" asp-route-userId="@user.Id">Düzenle</a>
+                    <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteUser" asp-route-userId="@user.Id">Sil</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+</div>

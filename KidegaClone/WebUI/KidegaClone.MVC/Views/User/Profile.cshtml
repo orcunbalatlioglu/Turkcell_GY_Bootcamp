@@ -1,0 +1,30 @@
+﻿@model ProfileViewModel
+@{
+    ViewData["Title"] = "Profile";
+    //TODO: Zaman kalırsa profil düzenleme ekle
+}
+
+<div class="row">
+    <div class="col-10">
+        <div> 
+            <h2>İsim</h2>
+            <p>@Model.Name</p>
+        </div>
+        <div>
+            <h2>Soyisim</h2>
+            <p>@Model.Surname</p>
+        </div>
+        <div>
+            <h2>E-posta Adresi</h2>
+            <p>@Model.Email</p>
+        </div>
+        <div>
+            <h2>Telefon Numarası</h2>
+            <p>@Model.Phone</p>
+        </div>
+    </div>
+    <div class="col-2">
+        <a class="btn btn-info"> Profili Düzenle </a>
+    </div>
+
+</div>

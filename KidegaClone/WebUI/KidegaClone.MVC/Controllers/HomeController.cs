@@ -1,16 +1,9 @@
-﻿using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using System.Diagnostics;
 using KidegaClone.MVC.Models;
 using KidegaClone.Services;
-using KidegaClone.Domain.DTOs.Request;
 using KidegaClone.Domain.DTOs.Response;
-using KidegaClone.DomainService.Repositories;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using KidegaClone.Domain.Entities;
-using KidegaClone.MVC.Extensions;
-using NuGet.Configuration;
+using KidegaClone.MVC.Cache;
 
 namespace KidegaClone.MVC.Controllers
 {
@@ -22,6 +15,7 @@ namespace KidegaClone.MVC.Controllers
         private readonly IPublisherService _publisherService;
         private readonly ICategoryService _categoryService;
         private readonly IMemoryCache _memoryCache;
+
         public HomeController(ILogger<HomeController> logger, 
                               IBookService bookService,
                               IAuthorService authorService,
@@ -39,16 +33,8 @@ namespace KidegaClone.MVC.Controllers
 
         public async Task<IActionResult> Index(int pageNo = 1, int? id = null)
         {
-            //TODO: Cache işlemleri eklecenek
-            IEnumerable<DisplayBookResponse> books;
-            if (id == null)
-            { 
-                books =  await _bookService.GetTopRatedBooksAsync(10);
-            }
-            else
-            {
-                books = await _bookService.GetByCategoryIdAsync(id.Value);
-            }
+            IEnumerable<DisplayBookResponse> books = await getBooksMemCacheOrDb(id);
+            
             var bookPerPage = 6;
             var bookCount = books.Count();
             var totalPage = Math.Ceiling((decimal)bookCount / bookPerPage);
@@ -125,16 +111,49 @@ namespace KidegaClone.MVC.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Login()
+        private async Task<IEnumerable<DisplayBookResponse>> getBooksMemCacheOrDb(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                if (!_memoryCache.TryGetValue("topRatedBooks", out CacheData cacheDataInfo))
+                {
+                    var options = new MemoryCacheEntryOptions()
+                                      .SetSlidingExpiration(TimeSpan.FromMinutes(1))
+                                      .SetPriority(CacheItemPriority.Normal);
+                    IEnumerable<DisplayBookResponse> books;
+
+                    books = await _bookService.GetTopRatedBooksAsync(10);
+                    cacheDataInfo = new CacheData
+                    {
+                        CacheTime = DateTime.Now,
+                        Books = books
+                    };
+                    _memoryCache.Set("topRatedBooks", cacheDataInfo, options);
+                }
+                return cacheDataInfo.Books;
+            } 
+            
+            else
+            {                
+                if (!_memoryCache.TryGetValue("booksByCategories"+id.ToString(), out CacheData cacheDataInfo))
+                {
+                    var options = new MemoryCacheEntryOptions()
+                                      .SetSlidingExpiration(TimeSpan.FromMinutes(1))
+                                      .SetPriority(CacheItemPriority.Normal);
+                    IEnumerable<DisplayBookResponse> books;
+
+                    books = await _bookService.GetByCategoryIdAsync((int)id);
+                    cacheDataInfo = new CacheData
+                    {
+                        CacheTime = DateTime.Now,
+                        Books = books
+                    };
+                    _memoryCache.Set("topRatedBooks", cacheDataInfo, options);
+                }
+                return cacheDataInfo.Books;
+            }
+
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-        
     }
 }

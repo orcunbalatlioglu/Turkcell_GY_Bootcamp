@@ -54,12 +54,12 @@ namespace KidegaClone.DomainService.Repositories
 
         public Book? Get(int id)
         {
-            return _context.Books.SingleOrDefault(x => x.Id == id);
+            return _context.Books.AsNoTracking().SingleOrDefault(x => x.Id == id);
         }
 
         public async Task<Book?> GetAsync(int id)
         {
-            return await _context.Books.SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Books.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public IList<Book?> GetAll()
