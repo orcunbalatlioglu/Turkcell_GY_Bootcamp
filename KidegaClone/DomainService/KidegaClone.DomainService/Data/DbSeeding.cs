@@ -1183,10 +1183,5 @@ namespace KidegaClone.DomainService.Data
             }
         }
 
-        private static void seedObjects(KidegaCloneDbContext context)
-        {
-
-        }
-
     }
 }
